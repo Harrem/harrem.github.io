@@ -1,2 +1,4 @@
-# html-freebie-portfolio-perfect
-One page template, a great choice for creating a personal portfolio website, including services, projects and contact form with nice and smooth scrolling through the sections. Modern and clean HTML5 template, perfect for your online CV.
+# Welcome
+Welcome to my portfolio website! My name is Harrem, and I'm a passionate Unity and Flutter
+developer with a flair for UI/UX design. I also have experience in 3D modeling and a strong
+affinity for clean coding practices.
