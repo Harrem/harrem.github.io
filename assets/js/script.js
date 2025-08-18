@@ -75,15 +75,4 @@ $(function() {
         $this.countTo(options);
     }
 
-    // Navigation overlay
-    var s = skrollr.init({
-            forceHeight: false,
-            smoothScrolling: false,
-            mobileDeceleration: 0.004,
-            mobileCheck: function() {
-                //hack - forces mobile version to be off
-                return false;
-            }
-    });
-    
 });
