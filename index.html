@@ -6,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <title>Harrem M Jalal | Portfolio 2025</title>
+    
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <!-- Icons -->
     <link href="assets/css/fontello.css" rel="stylesheet">
+    
     <!-- Styles -->
     <link href="assets/css/style.css" rel="stylesheet">
 
@@ -22,6 +25,7 @@
     <main class="bento-container">
         <!-- 1. Hero / Intro Card -->
         <div class="bento-card span-3 row-2 hero-card">
+            <canvas id="liquid-canvas"></canvas>
             <span class="section-title">Software Engineer & UI/UX Designer</span>
             <h1 class="title-large">Harrem M Jalal</h1>
             <p class="subtitle">Building scalable backends, immersive mobile apps, and premium digital experiences.</p>
@@ -48,8 +52,8 @@
                 <div class="skill-tag">C#</div>
             </div>
             <p style="margin-top:15px; font-size: 0.9rem; color: #ccc;">
-                Specialized in crafting robust backend architectures with <strong>Laravel</strong> and high-performance
-                cross-platform apps using <strong>Flutter</strong>.
+                Specialized in crafting robust backend architectures with <strong>Laravel</strong> and high-performance cross-platform
+                apps using <strong>Flutter</strong>.
             </p>
         </div>
 
@@ -68,10 +72,11 @@
                     <a href="https://github.com/Harrem" target="_blank" style="font-size:2rem;"><i class="icon-github-circled"></i></a>
                 </div>
             </div>
-            </div>
-<!-- 5. Projects Section Header -->
-<div class="bento-card span-4" id="projects" style="padding-bottom:10px;">
-    <h2 style="margin:0;">Recent Projects</h2>
+        </div>
+
+        <!-- 5. Projects Section Header -->
+        <div class="bento-card span-4" id="projects" style="padding-bottom:10px;">
+            <h2 style="margin:0;">Recent Projects</h2>
         </div>
 
         <!-- Project 1 -->
@@ -82,8 +87,7 @@
                 <h3>Traveling App</h3>
                 <p style="font-size:0.9rem; margin: 10px 0; color:#aaa;">Personalized trip planning and real-time updates.</p>
                 <div class="project-links">
-                    <a href="https://apps.apple.com/us/app/mrtravel/id6473445431" target="_blank" class="skill-tag">App
-                        Store</a>
+                    <a href="https://apps.apple.com/us/app/mrtravel/id6473445431" target="_blank" class="skill-tag">App Store</a>
                 </div>
             </div>
         </div>
@@ -139,10 +143,10 @@
                 I'm Harrem, a passionate developer combining technical precision with creative design.
             </p>
             <p style="margin-bottom:20px; font-size:0.95rem; color:#ccc;">
-                Recently, I've expanded my expertise into <strong>Backend Development with Laravel</strong>, allowing me to
-                build complete, end-to-end solutions.
-                My background in <strong>Flutter</strong> ensures pixel-perfect mobile experiences, while my eye for
-                <strong>UI/UX Design</strong> guarantees that every product is intuitive and beautiful.
+                Recently, I've expanded my expertise into <strong>Backend Development with Laravel</strong>, allowing me to build
+                complete, end-to-end solutions.
+                My background in <strong>Flutter</strong> ensures pixel-perfect mobile experiences, while my eye for <strong>UI/UX
+                    Design</strong> guarantees that every product is intuitive and beautiful.
             </p>
             <a href="https://drive.google.com/file/d/1cxXjrZlQdeS5mj9D7NJVxSEIYnmfnN6E/view?usp=share_link" target="_blank"
                 class="btn btn-outline" style="width:fit-content;">Download CV</a>
@@ -162,6 +166,7 @@
                     </svg>
                     <span>Email</span>
                 </a>
+                
                 <!-- Phone -->
                 <a href="tel:+1234567890" class="contact-icon-btn phone" title="Call Me">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -170,6 +175,7 @@
                     </svg>
                     <span>Phone or dial</span>
                 </a>
+                
                 <!-- WhatsApp -->
                 <a href="https://wa.me/1234567890" target="_blank" class="contact-icon-btn whatsapp" title="WhatsApp">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -178,7 +184,7 @@
                     </svg>
                     <span>WhatsApp</span>
                 </a>
-                </div>
+            </div>
         </div>
 
         <!-- Footer -->
@@ -188,10 +194,13 @@
 
     </main>
 
+    <!-- Alive UX Elements -->
+    <div class="custom-cursor"></div>
+    <div class="noise-overlay"></div>
+
     <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="assets/js/script.js"></script>
-    <!-- Keep custom scripts if they have useful logic, otherwise may need prune -->
+    <script src="assets/js/alive.js"></script>
+    <script src="assets/js/liquid.js"></script>
 
 </body>
 </html>
