@@ -145,6 +145,11 @@ h1 .gradient-text {
     align-items: center;
     position: relative;
     padding-top: 80px;
+    background-image:
+            linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 80px 80px;
+        background-position: center center;
 }
 
 .hero-bg-glow {
@@ -586,6 +591,10 @@ footer h2 {
         .bento-card {
             padding: 25px;
             min-height: auto;
+            width: 100%;
+                /* Force full width */
+                max-width: 100%;
+                /* Prevent overflow */
         }
     
         /* Profile Card Mobile */
