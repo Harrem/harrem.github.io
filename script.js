@@ -130,4 +130,24 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // Smooth Scroll for Anchor Links (Lenis)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                lenis.scrollTo(targetElement, {
+                    offset: -100, // Offset for fixed header
+                    duration: 1.5,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential ease out
+                    lock: true,
+                    force: true
+                });
+            }
+        });
+    });
+
 });

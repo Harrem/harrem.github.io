@@ -77,6 +77,11 @@ a {
     padding: 0 20px;
 }
 
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px;
+    }
+}
 .gradient-text {
     background: linear-gradient(135deg, #fff 0%, var(--text-muted) 100%);
     -webkit-background-clip: text;
@@ -275,52 +280,108 @@ h1 .gradient-text {
 /* Profile Card Specifics */
 .profile-card {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+        padding: 30px;
+        gap: 30px;
+        background: rgba(255, 255, 255, 0.04);
+    }
+    
+    @media(min-width: 768px) {
+        .profile-card {
+            flex-direction: row;
+            align-items: center;
+        justify-content: space-between;
+        }
 }
-.profile-img-container {
-    width: 150px;
-    height: 100%;
-    border-radius: 10px;
-    overflow: hidden;
-}
-.profile-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.8;
-}
-.stats-row {
+.profile-info {
+    flex: 1;
     display: flex;
-    gap: 30px;
-    margin-top: auto;
-    padding-top: 20px;
+    flex-direction: column;
+    gap: 15px;
 }
-.stat {
+.role-title {
+    color: var(--accent-glow);
+    font-weight: 500;
+    margin-top: -10px;
+    font-size: 0.95rem;
+}
+
+.bio-text {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 90%;
+}
+
+.stats-grid {
+    display: flex;
+    gap: 40px;
+        margin-top: 20px;
+}
+.stat-item {
     display: flex;
     flex-direction: column;
 }
-.stat-num {
-    font-size: 2rem;
-    font-weight: 700;
+/* Avatar Styling */
+.profile-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    flex-shrink: 0;
+    position: relative;
 }
-.stat-label {
-    font-size: 0.8rem;
-    color: var(--text-muted);
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Center usually works, but if it's a UI screenshot, top-center might be better. 
+           Let's stick to center for generic support. */
+    object-position: center;
 }
 
 /* Stack Card */
+.stack-card .card-header h3 {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.stack-card .card-header .dim {
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 1rem;
+}
 .tags-wrapper {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 12px;
+        /* Increased gap */
+        margin-top: 25px;
+        align-content: start;
 }
 .tag {
-    background: rgba(255,255,255,0.05);
-    padding: 6px 12px;
-    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        /* Subtle border */
+        padding: 8px 16px;
+        border-radius: 8px;
+        /* Less pill-like, more chip-like */
     font-size: 0.85rem;
-    color: #ccc;
+    color: var(--text-muted);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        font-weight: 500;
+        cursor: default;
+    }
+    
+    .tag:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: var(--accent-glow);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
 }
 
 /* Social Cards */
@@ -455,27 +516,161 @@ footer h2 {
         grid-template-columns: repeat(2, 1fr);
     }
     .span-4, .span-2 { grid-column: span 2; }
+                                                                /* Hero Adjustments for Tablet */
+                                                                .hero-title {
+                                                                    font-size: 5rem;
+                                                                }
 }
 
 @media (max-width: 768px) {
-    .hero-title { font-size: 3rem; }
-    .bento-grid { display: flex; flex-direction: column; }
-    .bento-card { min-height: 200px; }
+    /* Hero Mobile */
+        .hero {
+            padding-top: 140px;
+            /* Space for nav */
+            align-items: flex-start;
+            min-height: auto;
+            padding-bottom: 80px;
+        }
     
+        .hero-content {
+            gap: 20px;
+        }
+    
+        .hero-title {
+            font-size: 2.8rem;
+            line-height: 1.15;
+        }
+    
+        .hero-subtitle {
+            font-size: 1.05rem;
+            max-width: 100%;
+        }
+    
+        /* Nav Mobile */
+        .glass-nav {
+            width: 90%;
+            top: 20px;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 12, 0.85);
+            border-radius: 16px;
+            padding: 12px 20px;
+        }
+    
+        .nav-links a {
+            display: none;
+        }
+    
+        /* Hide regular links if too crowded, or keep them? */
+        .nav-links {
+            gap: 15px;
+        }
+    
+        .nav-links a:last-child {
+            display: block;
+        }
+    
+        /* Always show CTA */
+        /* Let's keep links but make them smaller */
+        .nav-links a {
+            display: block;
+            font-size: 0.85rem;
+        }
+    
+        /* Bento Grid Mobile */
+        .bento-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    
+        .bento-card {
+            padding: 25px;
+            min-height: auto;
+        }
+    
+        /* Profile Card Mobile */
+        .profile-card {
+            padding: 30px 20px;
+            text-align: center;
+            align-items: center;
+        }
+    
+        .profile-info {
+            align-items: center;
+        }
+    
+        .profile-info h3 {
+            font-size: 1.6rem;
+        }
+    
+        .role-title {
+            font-size: 1rem;
+            margin-top: -5px;
+        }
+    
+        .bio-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 100%;
+        }
+    
+        .stats-grid {
+            gap: 40px;
+            justify-content: center;
+        }
+    
+        .profile-avatar {
+            width: 110px;
+            height: 110px;
+            order: -1;
+            margin-bottom: 20px;
+            align-self: center;
+        }
+    
+        /* Stack Card Mobile */
+        .stack-card {
+            text-align: center;
+        }
+    
+        .stack-card .card-header h3 {
+            font-size: 1.4rem;
+            justify-content: center;
+        }
+    
+        .tags-wrapper {
+            gap: 10px;
+            justify-content: center;
+        }
+    
+                .tag {
+                    font-size: 0.95rem;
+                    /* Larger font */
+                    padding: 10px 18px;
+                    /* Larger touch target */
+                    background: rgba(255, 255, 255, 0.06);
+                    /* Slightly more visible */
+                }
+        
+                /* Projects Mobile */
     .project-item {
         grid-template-columns: 1fr;
         gap: 30px;
+        margin-bottom: 80px;
     }
     .project-item.reverse { direction: ltr; }
-    .project-image-wrapper { height: 250px; }
-    
-    .glass-nav {
-        width: 100%;
-        border-radius: 0;
-        top: 0;
-        backdrop-filter: blur(20px);
-        background: rgba(5,5,7,0.8);
-        border: none;
-        border-bottom: 1px solid var(--border);
+                                                                .project-image-wrapper {
+                                                                    height: 260px;
+                                                                }
+                                                                .project-info h3 {
+                                                                    font-size: 2rem;
+                                                                }
+                                
+                                                                /* Touch Feedback */
+                                                                .btn-primary:active,
+                                                                .footer-btn:active,
+                                                                .tag:active {
+                                                                    transform: scale(0.96);
+                                                                    opacity: 0.8;
     }
 }
