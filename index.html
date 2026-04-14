@@ -143,8 +143,40 @@
                 </div>
 
                 <div class="projects-list">
-                    <!-- Project 1 -->
-                    <div class="project-item">
+                    <!-- Project: Transcanada Export -->
+                    <div class="project-item" data-project="transcanada">
+                        <div class="project-image-wrapper">
+                            <img src="assets/img/transcanada-hero.jpg" alt="Transcanada Export">
+                            <div class="overlay"></div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-meta">Full-Stack Solution</div>
+                            <h3>Transcanada Export</h3>
+                            <p>Complete car export platform with website, mobile app, and admin panel.</p>
+                            <span class="project-link project-detail-trigger">View Details
+                                <svg class="arrow-mini" viewBox="0 0 24 24" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Project: SmartRetail -->
+                    <div class="project-item reverse" data-project="smartretail">
+                        <div class="project-image-wrapper">
+                            <img src="assets/img/smartretail-hero.jpg" alt="SmartRetail">
+                            <div class="overlay"></div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-meta">Desktop Application</div>
+                            <h3>SmartRetail</h3>
+                            <p>All-in-one retail management system for small businesses.</p>
+                            <span class="project-link project-detail-trigger">View Details
+                                <svg class="arrow-mini" viewBox="0 0 24 24" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Project: mrtravel -->
+                    <div class="project-item" data-project="mrtravel">
                         <div class="project-image-wrapper">
                             <img src="assets/img/Portfolio-0.png" alt="Travel App">
                             <div class="overlay"></div>
@@ -153,14 +185,14 @@
                             <div class="project-meta">Flutter App</div>
                             <h3>mrtravel App</h3>
                             <p>Personalized trip planning and real-time updates.</p>
-                            <a href="https://apps.apple.com/us/app/mrtravel/id6473445431" target="_blank" class="project-link">App Store 
+                            <span class="project-link project-detail-trigger">View Details
                                 <svg class="arrow-mini" viewBox="0 0 24 24" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </a>
+                            </span>
                         </div>
                     </div>
-
-                    <!-- Project 2 -->
-                    <div class="project-item reverse">
+                    
+                    <!-- Project: AR Wayfinding -->
+                    <div class="project-item reverse" data-project="arwayfinding">
                         <div class="project-image-wrapper">
                              <img src="assets/img/Portfolio-1.jpg" alt="AR Wayfinding">
                              <div class="overlay"></div>
@@ -169,14 +201,14 @@
                             <div class="project-meta">Unity / AR</div>
                             <h3>AR Wayfinding</h3>
                             <p>Next-gen navigation using Augmented Reality markers and pathfinding.</p>
-                             <a href="https://github.com/Harrem/ArWayfindingProject" target="_blank" class="project-link">View Code
+                            <span class="project-link project-detail-trigger">View Details
                                 <svg class="arrow-mini" viewBox="0 0 24 24" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </a>
+                            </span>
                         </div>
                     </div>
                     
-                    <!-- Project 3 -->
-                    <div class="project-item">
+                    <!-- Project: Real-time Chat -->
+                    <div class="project-item" data-project="realtimechat">
                         <div class="project-image-wrapper">
                             <img src="assets/img/Portfolio-5.jpg" alt="Chat App">
                             <div class="overlay"></div>
@@ -185,9 +217,9 @@
                             <div class="project-meta">Firebase</div>
                             <h3>Real-time Chat</h3>
                             <p>Instant messaging with seamless synchronization.</p>
-                             <a href="https://github.com/Harrem/messagingApp" target="_blank" class="project-link">View Code
+                            <span class="project-link project-detail-trigger">View Details
                                 <svg class="arrow-mini" viewBox="0 0 24 24" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </a>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -209,6 +241,57 @@
         </footer>
 
     </main>
+
+    <!-- Project Detail Modal -->
+    <div class="project-modal" id="projectModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <button class="modal-close" id="modalClose" aria-label="Close">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal-scroll">
+                <!-- Hero Image -->
+                <div class="modal-hero">
+                    <img id="modalHeroImg" src="" alt="">
+                    <div class="modal-hero-overlay"></div>
+                </div>
+
+                <!-- Content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="modal-category" id="modalCategory"></span>
+                        <h2 class="modal-title" id="modalTitle"></h2>
+                        <p class="modal-subtitle" id="modalSubtitle"></p>
+                    </div>
+
+                    <!-- Tech Stack -->
+                    <div class="modal-section">
+                        <h4 class="modal-section-title">Tech Stack</h4>
+                        <div class="modal-tags" id="modalTechStack"></div>
+                    </div>
+
+                    <!-- Features -->
+                    <div class="modal-section">
+                        <h4 class="modal-section-title">Key Features</h4>
+                        <ul class="modal-features" id="modalFeatures"></ul>
+                    </div>
+
+                    <!-- Gallery -->
+                    <div class="modal-section">
+                        <h4 class="modal-section-title">Gallery</h4>
+                        <div class="modal-gallery" id="modalGallery"></div>
+                    </div>
+
+                    <!-- Links -->
+                    <div class="modal-actions" id="modalActions"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
