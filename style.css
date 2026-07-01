@@ -909,28 +909,30 @@ body.modal-open {
             /* Ensure no child blows out container */
         }
     /* Hero Mobile */
-        .hero {
+    .hero {
         padding-top: 130px;
-            align-items: flex-start;
-            min-height: auto;
+        align-items: flex-start;
+        min-height: auto;
         padding-bottom: 60px;
-        
-        .hero-content {
-        gap: 15px;
-            width: 100%;
-        
-        .hero-title {
-        font-size: clamp(2.5rem, 10vw, 3rem);
-            /* Fluid sizing */
-            line-height: 1.1;
-            word-break: break-word;
-            /* Prevent long words causing overflow */
-        }
+    }
     
-        .hero-subtitle {
-            font-size: 1.05rem;
-            max-width: 100%;
-        }
+    .hero-content {
+        gap: 15px;
+        width: 100%;
+    }
+    
+    .hero-title {
+        font-size: clamp(2.5rem, 10vw, 3rem);
+        /* Fluid sizing */
+        line-height: 1.1;
+        word-break: break-word;
+        /* Prevent long words causing overflow */
+    }
+    
+    .hero-subtitle {
+        font-size: 1.05rem;
+        max-width: 100%;
+    }
     
         /* Nav Mobile */
         .glass-nav {
@@ -1062,7 +1064,5 @@ body.modal-open {
                                                                 .tag:active {
                                                                     transform: scale(0.96);
                                                                     opacity: 0.8;
-    }
+                                                                }
 }
-                }
-                }
