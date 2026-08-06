@@ -224,10 +224,80 @@ document.addEventListener("DOMContentLoaded", async () => {
     modal.addEventListener('wheel', (e) => { e.stopPropagation(); }, { passive: true });
     modal.addEventListener('touchmove', (e) => { e.stopPropagation(); }, { passive: true });
 
+    // ===== INLINE IMAGE ZOOM =====
+    // Single zoomable image overlay — no nested modal chrome
+    const zoomOverlay = document.getElementById('imageZoomOverlay');
+    const zoomImg = document.getElementById('zoomImg');
+    const zoomCaption = document.getElementById('zoomCaption');
+    let zoomImages = []; // all images for the current project
+    let zoomIndex = 0;
+
+    function openZoom(images, index) {
+        zoomImages = images;
+        zoomIndex = index;
+        renderZoomImage();
+        zoomOverlay.classList.add('active');
+        document.body.classList.add('zoom-open');
+    }
+
+    function renderZoomImage() {
+        const current = zoomImages[zoomIndex];
+        zoomImg.src = current.src;
+        zoomImg.alt = current.alt;
+        zoomCaption.textContent = current.caption || '';
+        // Update counter
+        document.getElementById('zoomCounter').textContent = `${zoomIndex + 1} / ${zoomImages.length}`;
+        // Hide nav if only 1 image
+        const nav = zoomOverlay.querySelectorAll('.zoom-nav');
+        nav.forEach(b => b.style.display = zoomImages.length > 1 ? '' : 'none');
+    }
+
+    function closeZoom() {
+        zoomOverlay.classList.remove('active');
+        document.body.classList.remove('zoom-open');
+    }
+
+    function zoomPrev() {
+        zoomIndex = (zoomIndex - 1 + zoomImages.length) % zoomImages.length;
+        renderZoomImage();
+    }
+
+    function zoomNext() {
+        zoomIndex = (zoomIndex + 1) % zoomImages.length;
+        renderZoomImage();
+    }
+
+    // Zoom overlay events
+    document.getElementById('zoomClose').addEventListener('click', closeZoom);
+    document.getElementById('zoomPrev').addEventListener('click', zoomPrev);
+    document.getElementById('zoomNext').addEventListener('click', zoomNext);
+    zoomOverlay.addEventListener('click', (e) => {
+        if (e.target === zoomOverlay || e.target.classList.contains('zoom-backdrop')) closeZoom();
+    });
+
+    // Keyboard for zoom
+    document.addEventListener('keydown', (e) => {
+        if (!zoomOverlay.classList.contains('active')) return;
+        if (e.key === 'Escape') closeZoom();
+        if (e.key === 'ArrowLeft') zoomPrev();
+        if (e.key === 'ArrowRight') zoomNext();
+    });
+
+    // Touch swipe for zoom on mobile
+    let touchStartX = 0;
+    zoomOverlay.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    zoomOverlay.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) dx < 0 ? zoomNext() : zoomPrev();
+    }, { passive: true });
+
+    // ===== MODAL OPEN / CLOSE =====
+    let currentModalData = null;
+
     function openProjectModal(data) {
-        // Populate modal
-        document.getElementById('modalHeroImg').src = data.cover;
-        document.getElementById('modalHeroImg').alt = data.title;
+        currentModalData = data;
+
+        // Populate header
         document.getElementById('modalCategory').textContent = data.category;
         document.getElementById('modalYear').textContent = data.year;
         document.getElementById('modalTitle').textContent = data.title;
@@ -245,29 +315,48 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         // Tech Stack
-        const techContainer = document.getElementById('modalTechStack');
-        techContainer.innerHTML = data.techStack.map(t => `<span class="tag">${t}</span>`).join('');
+        document.getElementById('modalTechStack').innerHTML =
+            data.techStack.map(t => `<span class="tag">${t}</span>`).join('');
 
         // Features
         const featuresContainer = document.getElementById('modalFeatures');
         if (data.features && data.features.length > 0) {
             featuresContainer.innerHTML = data.features.map(f => `<li>${f}</li>`).join('');
-            featuresContainer.parentElement.style.display = '';
+            featuresContainer.closest('.modal-section').style.display = '';
         } else {
             featuresContainer.innerHTML = '';
-            featuresContainer.parentElement.style.display = 'none';
+            featuresContainer.closest('.modal-section').style.display = 'none';
         }
 
-        // Gallery
+        // Gallery — full-width showcase images, click to zoom
+        const gallerySection = document.getElementById('modalGallery').closest('.modal-section');
         const galleryContainer = document.getElementById('modalGallery');
-        if (data.images && data.images.length > 0) {
-            galleryContainer.innerHTML = data.images.map(img => 
-                `<div class="modal-gallery-item"><img src="${img.src}" alt="${img.alt}" loading="lazy"></div>`
-            ).join('');
-            galleryContainer.parentElement.style.display = '';
+
+        // Build image list: hero cover + gallery images (deduplicated)
+        const allImages = data.images && data.images.length > 0 ? data.images : (data.cover ? [{ src: data.cover, alt: data.title, caption: data.title }] : []);
+
+        if (allImages.length > 0) {
+            galleryContainer.innerHTML = allImages.map((img, i) => `
+                <div class="showcase-image" data-index="${i}">
+                    <img src="${img.src}" alt="${img.alt}" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async">
+                    <div class="showcase-zoom-hint">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                    </div>
+                    ${img.caption ? `<p class="showcase-caption">${img.caption}</p>` : ''}
+                </div>
+            `).join('');
+
+            // Attach zoom click handlers
+            galleryContainer.querySelectorAll('.showcase-image').forEach((el) => {
+                el.addEventListener('click', () => {
+                    openZoom(allImages, parseInt(el.dataset.index, 10));
+                });
+            });
+
+            gallerySection.style.display = '';
         } else {
             galleryContainer.innerHTML = '';
-            galleryContainer.parentElement.style.display = 'none';
+            gallerySection.style.display = 'none';
         }
 
         // Actions/Links
@@ -285,12 +374,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             actionsContainer.style.display = 'none';
         }
 
-        // Show modal
+        // Show modal + hash routing
         modal.classList.add('active');
         document.body.classList.add('modal-open');
         lenis.stop();
-
-        // Reset scroll position
+        history.pushState({ project: data.slug }, '', `#${data.slug}`);
         modal.querySelector('.modal-scroll').scrollTop = 0;
     }
 
@@ -298,14 +386,33 @@ document.addEventListener("DOMContentLoaded", async () => {
         modal.classList.remove('active');
         document.body.classList.remove('modal-open');
         lenis.start();
+        if (window.location.hash) history.pushState({}, '', window.location.pathname);
     }
 
     // Close modal
     modalClose.addEventListener('click', closeProjectModal);
     modalBackdrop.addEventListener('click', closeProjectModal);
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
+        if (e.key === 'Escape' && modal.classList.contains('active') && !zoomOverlay.classList.contains('active')) {
             closeProjectModal();
+        }
+    });
+
+    // Hash-based deep linking — open modal if URL has a project hash on load
+    function openFromHash() {
+        const hash = window.location.hash.replace('#', '');
+        if (!hash) return;
+        const project = projectsData.find(p => p.slug === hash);
+        if (project) openProjectModal(project);
+    }
+    openFromHash();
+    window.addEventListener('popstate', () => {
+        if (!window.location.hash && modal.classList.contains('active')) {
+            modal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+            lenis.start();
+        } else {
+            openFromHash();
         }
     });
 

@@ -1395,3 +1395,210 @@ body.modal-open {
         opacity: 0.8;
     }
 }
+
+/* ===== SHOWCASE GALLERY (Full-Width in Modal) ===== */
+.modal-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.showcase-image {
+    position: relative;
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: zoom-in;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    background: rgba(255, 255, 255, 0.02);
+}
+.showcase-image:hover {
+    border-color: rgba(255, 255, 255, 0.14);
+    transform: translateY(-2px);
+}
+.showcase-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.showcase-image:hover img {
+    transform: scale(1.015);
+}
+
+/* Zoom hint icon — appears on hover */
+.showcase-zoom-hint {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+}
+.showcase-zoom-hint svg {
+    width: 16px;
+    height: 16px;
+    color: rgba(255, 255, 255, 0.9);
+}
+.showcase-image:hover .showcase-zoom-hint {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Caption below image */
+.showcase-caption {
+    padding: 10px 14px;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.35);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    margin: 0;
+}
+
+
+/* ===== IMAGE ZOOM OVERLAY ===== */
+/* Single-layer, no nested chrome — fills viewport above all modals */
+.image-zoom-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.image-zoom-overlay.active {
+    pointer-events: all;
+    opacity: 1;
+    visibility: visible;
+}
+
+.zoom-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(60px) saturate(1.5);
+    -webkit-backdrop-filter: blur(60px) saturate(1.5);
+}
+
+/* Zoomed image */
+.zoom-image-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 90vw;
+    max-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.zoom-image-wrap img {
+    max-width: 90vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
+    transition: opacity 0.2s ease;
+}
+
+/* Close button */
+.zoom-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.2s ease;
+    backdrop-filter: blur(12px);
+}
+.zoom-close svg { width: 18px; height: 18px; }
+.zoom-close:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Prev / Next nav */
+.zoom-nav {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.2s ease;
+    backdrop-filter: blur(12px);
+}
+.zoom-nav svg { width: 20px; height: 20px; }
+.zoom-nav:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: white;
+}
+.zoom-prev { left: 20px; }
+.zoom-next { right: 20px; }
+
+/* Footer bar: counter + caption */
+.zoom-footer {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+.zoom-counter {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.35);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+.zoom-caption {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.65);
+    font-weight: 400;
+}
+
+/* ===== MOBILE ZOOM ===== */
+@media (max-width: 768px) {
+    .zoom-prev { left: 10px; }
+    .zoom-next { right: 10px; }
+    .zoom-image-wrap img {
+        max-width: 95vw;
+        max-height: 75vh;
+    }
+}

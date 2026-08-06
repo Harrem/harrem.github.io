@@ -256,12 +256,6 @@
                 </svg>
             </button>
             <div class="modal-scroll">
-                <!-- Hero Image -->
-                <div class="modal-hero">
-                    <img id="modalHeroImg" src="" alt="">
-                    <div class="modal-hero-overlay"></div>
-                </div>
-
                 <!-- Content -->
                 <div class="modal-content">
                     <div class="modal-header">
@@ -291,9 +285,9 @@
                         <ul class="modal-features" id="modalFeatures"></ul>
                     </div>
 
-                    <!-- Gallery -->
+                    <!-- Gallery — full-width showcase, click to zoom -->
                     <div class="modal-section">
-                        <h4 class="modal-section-title">Gallery</h4>
+                        <h4 class="modal-section-title">Screenshots</h4>
                         <div class="modal-gallery" id="modalGallery"></div>
                     </div>
 
@@ -301,6 +295,27 @@
                     <div class="modal-actions" id="modalActions"></div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Image Zoom Overlay (single layer, no nested modal chrome) -->
+    <div class="image-zoom-overlay" id="imageZoomOverlay">
+        <div class="zoom-backdrop"></div>
+        <button class="zoom-close" id="zoomClose" aria-label="Close image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <button class="zoom-nav zoom-prev" id="zoomPrev" aria-label="Previous image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="zoom-image-wrap">
+            <img id="zoomImg" src="" alt="" decoding="async">
+        </div>
+        <button class="zoom-nav zoom-next" id="zoomNext" aria-label="Next image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="zoom-footer">
+            <span class="zoom-counter" id="zoomCounter">1 / 1</span>
+            <span class="zoom-caption" id="zoomCaption"></span>
         </div>
     </div>
 
