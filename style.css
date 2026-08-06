@@ -1396,37 +1396,189 @@ body.modal-open {
     }
 }
 
-/* ===== SHOWCASE GALLERY (Full-Width in Modal) ===== */
+/* ===== CAROUSEL SLIDER & THUMBNAILS (Modal Gallery) ===== */
 .modal-gallery {
+    display: block;
+    width: 100%;
+}
+
+.carousel-wrapper {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    width: 100%;
 }
 
-.showcase-image {
+/* Outer wrapper: position context for expand btn — NOT overflow:hidden */
+.carousel-main-wrap {
     position: relative;
     width: 100%;
     border-radius: 14px;
-    overflow: hidden;
-    cursor: zoom-in;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    transition: border-color 0.3s ease, transform 0.3s ease;
-    background: rgba(255, 255, 255, 0.02);
-}
-.showcase-image:hover {
-    border-color: rgba(255, 255, 255, 0.14);
-    transform: translateY(-2px);
-}
-.showcase-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.showcase-image:hover img {
-    transform: scale(1.015);
 }
 
+.carousel-main {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: zoom-in;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    cursor: zoom-in;
+    pointer-events: auto;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-main:hover img {
+    transform: scale(1.02);
+}
+
+/* Expand Button (Bottom Right Corner) — anchored to .carousel-main-wrap so it's never clipped */
+.carousel-expand-btn {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(10, 10, 14, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.carousel-expand-btn svg {
+    width: 14px;
+    height: 14px;
+    color: var(--accent-glow);
+}
+
+.carousel-expand-btn:hover {
+    background: rgba(99, 102, 241, 0.85);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+.carousel-expand-btn:hover svg {
+    color: #ffffff;
+}
+
+/* Carousel Prev/Next Arrows */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(10, 10, 14, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: rgba(255, 255, 255, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    opacity: 0.7;
+}
+
+.carousel-main-wrap:hover .carousel-arrow {
+    opacity: 1;
+}
+
+.carousel-arrow svg {
+    width: 18px;
+    height: 18px;
+}
+
+.carousel-arrow:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-prev { left: 12px; }
+.carousel-next { right: 12px; }
+
+/* Caption */
+.carousel-caption {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 500;
+    margin: 0;
+    padding: 0 4px;
+}
+
+/* Thumbnails Strip */
+.carousel-thumbnails {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.carousel-thumbnails::-webkit-scrollbar {
+    display: none;
+}
+
+.thumb-card {
+    position: relative;
+    width: 80px;
+    height: 56px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.55;
+}
+
+.thumb-card:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+}
+
+.thumb-card.active {
+    opacity: 1;
+    border-color: var(--accent-glow);
+    box-shadow: 0 0 12px rgba(99, 102, 241, 0.35);
+}
+
+.thumb-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 /* Zoom hint icon — appears on hover */
 .showcase-zoom-hint {
     position: absolute;
@@ -1471,8 +1623,13 @@ body.modal-open {
 /* Single-layer, no nested chrome — fills viewport above all modals */
 .image-zoom-overlay {
     position: fixed;
-    inset: 0;
-    z-index: 500;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
     display: flex;
     align-items: center;
     justify-content: center;
