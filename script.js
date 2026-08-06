@@ -14,13 +14,13 @@ requestAnimationFrame(raf);
 
 // GSAP Animations & Dynamic Project Loading
 document.addEventListener("DOMContentLoaded", async () => {
-    
+
     // Register ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
-    
+
     // Hero Text Reveal
     const tl = gsap.timeline();
-    
+
     tl.from(".reveal-text", {
         y: 100,
         opacity: 0,
@@ -28,18 +28,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         stagger: 0.1,
         ease: "power4.out"
     })
-    .from(".reveal-opacity", {
-        opacity: 0,
-        y: 20,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power2.out"
-    }, "-=0.5")
-    .from(".glass-nav", {
-        y: -100,
-        duration: 0.8,
-        ease: "power3.out"
-    }, "-=1");
+        .from(".reveal-opacity", {
+            opacity: 0,
+            y: 20,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power2.out"
+        }, "-=0.5")
+        .from(".glass-nav", {
+            y: -100,
+            duration: 0.8,
+            ease: "power3.out"
+        }, "-=1");
 
     // Remove loading class
     document.body.classList.remove("loading");
@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
         });
         el.addEventListener("mouseleave", () => {
-             gsap.to(cursorOutline, {
+            gsap.to(cursorOutline, {
                 scale: 1,
                 backgroundColor: "transparent",
                 borderColor: "rgba(255, 255, 255, 0.5)",
@@ -228,20 +228,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Attaching to window ensures it's callable from anywhere — no closure scope issues
     window._zoom = { images: [], index: 0 };
 
-    window.openZoom = function(idx) {
+    window.openZoom = function (idx) {
         const imgs = window._zoom.images;
         if (!imgs || !imgs.length) return;
         window._zoom.index = Math.max(0, Math.min(idx, imgs.length - 1));
 
         const overlay = document.getElementById('imageZoomOverlay');
-        const img     = document.getElementById('zoomImg');
+        const img = document.getElementById('zoomImg');
         const caption = document.getElementById('zoomCaption');
         const counter = document.getElementById('zoomCounter');
-        const nav     = overlay.querySelectorAll('.zoom-nav');
+        const nav = overlay.querySelectorAll('.zoom-nav');
 
         const cur = imgs[window._zoom.index];
-        img.src            = cur.src;
-        img.alt            = cur.alt || '';
+        img.src = cur.src;
+        img.alt = cur.alt || '';
         caption.textContent = cur.caption || '';
         counter.textContent = `${window._zoom.index + 1} / ${imgs.length}`;
         nav.forEach(b => b.style.display = imgs.length > 1 ? '' : 'none');
@@ -250,13 +250,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.body.classList.add('zoom-open');
     };
 
-    window.closeZoom = function() {
+    window.closeZoom = function () {
         const overlay = document.getElementById('imageZoomOverlay');
         if (overlay) overlay.classList.remove('active');
         document.body.classList.remove('zoom-open');
     };
 
-    window.zoomStep = function(dir) {
+    window.zoomStep = function (dir) {
         const imgs = window._zoom.images;
         if (!imgs.length) return;
         window.openZoom((window._zoom.index + dir + imgs.length) % imgs.length);
@@ -279,8 +279,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const isModalOpen = modal.classList.contains('active');
 
         if (isZoomOpen) {
-            if (e.key === 'Escape')     window.closeZoom();
-            if (e.key === 'ArrowLeft')  window.zoomStep(-1);
+            if (e.key === 'Escape') window.closeZoom();
+            if (e.key === 'ArrowLeft') window.zoomStep(-1);
             if (e.key === 'ArrowRight') window.zoomStep(1);
         } else if (isModalOpen && e.key === 'Escape') {
             closeProjectModal();
@@ -393,15 +393,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Stop previous carousel timer
         if (window._carousel.timer) { clearInterval(window._carousel.timer); window._carousel.timer = null; }
 
-        document.getElementById('modalCategory').textContent  = data.category;
-        document.getElementById('modalYear').textContent      = data.year;
-        document.getElementById('modalTitle').textContent     = data.title;
-        document.getElementById('modalRole').textContent      = data.role || '';
-        document.getElementById('modalSubtitle').textContent  = data.summary;
+        document.getElementById('modalCategory').textContent = data.category;
+        document.getElementById('modalYear').textContent = data.year;
+        document.getElementById('modalTitle').textContent = data.title;
+        document.getElementById('modalRole').textContent = data.role || '';
+        document.getElementById('modalSubtitle').textContent = data.summary;
 
         // Outcome highlight
         const hlSection = document.getElementById('modalHighlightSection');
-        const hlEl      = document.getElementById('modalHighlight');
+        const hlEl = document.getElementById('modalHighlight');
         if (data.outcomeHighlight) { hlEl.textContent = data.outcomeHighlight; hlSection.style.display = ''; }
         else { hlSection.style.display = 'none'; }
 
@@ -420,8 +420,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         // Gallery
-        const gallerySection    = document.getElementById('modalGallery').closest('.modal-section');
-        const galleryContainer  = document.getElementById('modalGallery');
+        const gallerySection = document.getElementById('modalGallery').closest('.modal-section');
+        const galleryContainer = document.getElementById('modalGallery');
         const allImages = data.images && data.images.length
             ? data.images
             : (data.cover ? [{ src: data.cover, alt: data.title, caption: data.title }] : []);
