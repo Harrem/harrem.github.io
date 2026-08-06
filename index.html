@@ -64,17 +64,17 @@
             </div>
         </section>
 
-        <!-- Bento Grid Section (About & Skills) -->
-        <section id="about" class="bento-section">
+        <!-- About & Skills Section — Redesigned -->
+        <section id="about" class="about-section">
             <div class="container">
                 <div class="section-header">
-                    <span class="overline">Expertise</span>
-                    <h2>The Toolkit</h2>
+                    <span class="overline">About Me</span>
+                    <h2>Experience & Expertise</h2>
                 </div>
                 
-                <div class="bento-grid">
+                <div class="about-grid">
                     <!-- Profile Card -->
-                    <div class="bento-card span-2 row-2 profile-card">
+                    <div class="about-card profile-card">
                         <div class="profile-info">
                             <h3>Harrem M Jalal</h3>
                             <p class="role-title">Software Engineer & Designer</p>
@@ -97,34 +97,87 @@
                         </div>
                     </div>
 
-                    <!-- Tech Stack Card -->
-                    <div class="bento-card span-2 stack-card">
-                        <div class="card-header">
-                            <h3>Expertise <span class="dim">& Tools</span></h3>
+                    <!-- Skill Category: Frontend -->
+                    <div class="about-card skill-card">
+                        <div class="skill-card-header">
+                            <div class="skill-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                            </div>
+                            <h4>Frontend & Design</h4>
                         </div>
-                        <div class="tags-wrapper">
+                        <div class="skill-tags">
                             <span class="tag">Figma</span>
-                            <span class="tag">UI Design</span>
-                            <span class="tag">UX Design</span>
-                            <span class="tag">Flutter</span>
+                            <span class="tag">UI/UX Design</span>
+                            <span class="tag">React</span>
+                            <span class="tag">HTML/CSS/JS</span>
+                            <span class="tag">TailwindCSS</span>
+                            <span class="tag">SwiftUI</span>
+                        </div>
+                    </div>
+
+                    <!-- Skill Category: Backend -->
+                    <div class="about-card skill-card">
+                        <div class="skill-card-header">
+                            <div class="skill-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7V4a2 2 0 012-2h12a2 2 0 012 2v3"/><path d="M4 17v3a2 2 0 002 2h12a2 2 0 002-2v-3"/><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="7" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>
+                            </div>
+                            <h4>Backend & Data</h4>
+                        </div>
+                        <div class="skill-tags">
                             <span class="tag">Laravel</span>
                             <span class="tag">PHP</span>
-                            <span class="tag">Git</span>
-                            <span class="tag">GitHub</span>
-                            <span class="tag">Unity AR/VR</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">PostgreSQL</span>
+                            <span class="tag">Firebase</span>
+                            <span class="tag">Redis</span>
+                        </div>
+                    </div>
+
+                    <!-- Skill Category: Mobile -->
+                    <div class="about-card skill-card">
+                        <div class="skill-card-header">
+                            <div class="skill-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                            </div>
+                            <h4>Mobile</h4>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="tag">Flutter</span>
                             <span class="tag">Dart</span>
+                            <span class="tag">Swift</span>
+                            <span class="tag">SwiftUI</span>
+                        </div>
+                    </div>
+
+                    <!-- Skill Category: Tools & Other -->
+                    <div class="about-card skill-card">
+                        <div class="skill-card-header">
+                            <div class="skill-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+                            </div>
+                            <h4>Tools & Other</h4>
+                        </div>
+                        <div class="skill-tags">
+                            <span class="tag">Git / GitHub</span>
+                            <span class="tag">Unity AR/VR</span>
                             <span class="tag">C#</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">OpenCV</span>
+                            <span class="tag">Electron.js</span>
                         </div>
                     </div>
 
                     <!-- Socials Card -->
-                    <div class="bento-card span-1 social-card">
+                    <div class="about-card social-card">
                         <a href="https://github.com/Harrem" target="_blank" class="social-link">
                             <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                             <span>GitHub</span>
                         </a>
                     </div>
-                     <div class="bento-card span-1 cv-card">
+
+                    <!-- CV Card -->
+                    <div class="about-card cv-card">
                         <a href="https://drive.google.com/file/d/1FModNxOPdxNAR6I9zvxnp9NflVY1r8OA/view?usp=share_link" target="_blank"
                             class="cv-link">
                             <span>CV / Resume</span>
@@ -135,7 +188,7 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
+        <!-- Projects Section — Dynamic -->
         <section id="work" class="work-section">
             <div class="container">
                 <div class="section-header">
@@ -143,100 +196,49 @@
                     <h2>Recent Projects</h2>
                 </div>
 
-                <div class="projects-list">
-                    <!-- Project: Transcanada Export -->
-                    <div class="project-item" data-project="transcanada">
-                        <div class="project-image-wrapper">
-                            <img src="assets/img/transcanada-hero.jpg" alt="Transcanada Export">
-                            <div class="overlay"></div>
-                        </div>
-                        <div class="project-info">
-                            <div class="project-meta">Full-Stack Solution</div>
-                            <h3>Transcanada Export</h3>
-                            <p>Complete car export platform with website, mobile app, and admin panel.</p>
-                            <span class="project-link project-detail-trigger">View Details
-                                <svg class="arrow-mini" viewBox="0 0 24 24" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </span>
-                        </div>
-                    </div>
+                <!-- Category Filter -->
+                <div class="project-filters" id="projectFilters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                </div>
 
-                    <!-- Project: SmartRetail -->
-                    <div class="project-item reverse" data-project="smartretail">
-                        <div class="project-image-wrapper">
-                            <img src="assets/img/smartretail-hero.jpg" alt="SmartRetail">
-                            <div class="overlay"></div>
-                        </div>
-                        <div class="project-info">
-                            <div class="project-meta">Desktop Application</div>
-                            <h3>SmartRetail</h3>
-                            <p>All-in-one retail management system for small businesses.</p>
-                            <span class="project-link project-detail-trigger">View Details
-                                <svg class="arrow-mini" viewBox="0 0 24 24" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Project: mrtravel -->
-                    <div class="project-item" data-project="mrtravel">
-                        <div class="project-image-wrapper">
-                            <img src="assets/img/Portfolio-0.png" alt="Travel App">
-                            <div class="overlay"></div>
-                        </div>
-                        <div class="project-info">
-                            <div class="project-meta">Flutter App</div>
-                            <h3>mrtravel App</h3>
-                            <p>Personalized trip planning and real-time updates.</p>
-                            <span class="project-link project-detail-trigger">View Details
-                                <svg class="arrow-mini" viewBox="0 0 24 24" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <!-- Project: AR Wayfinding -->
-                    <div class="project-item reverse" data-project="arwayfinding">
-                        <div class="project-image-wrapper">
-                             <img src="assets/img/Portfolio-1.jpg" alt="AR Wayfinding">
-                             <div class="overlay"></div>
-                        </div>
-                       <div class="project-info">
-                            <div class="project-meta">Unity / AR</div>
-                            <h3>AR Wayfinding</h3>
-                            <p>Next-gen navigation using Augmented Reality markers and pathfinding.</p>
-                            <span class="project-link project-detail-trigger">View Details
-                                <svg class="arrow-mini" viewBox="0 0 24 24" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </span>
-                        </div>
-                    </div>
-                    
-                    <!-- Project: Real-time Chat -->
-                    <div class="project-item" data-project="realtimechat">
-                        <div class="project-image-wrapper">
-                            <img src="assets/img/Portfolio-5.jpg" alt="Chat App">
-                            <div class="overlay"></div>
-                        </div>
-                        <div class="project-info">
-                            <div class="project-meta">Firebase</div>
-                            <h3>Real-time Chat</h3>
-                            <p>Instant messaging with seamless synchronization.</p>
-                            <span class="project-link project-detail-trigger">View Details
-                                <svg class="arrow-mini" viewBox="0 0 24 24" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </span>
-                        </div>
-                    </div>
+                <!-- Dynamic Project Grid -->
+                <div class="projects-grid" id="projectsGrid">
+                    <!-- Projects loaded dynamically from projects.json -->
                 </div>
             </div>
         </section>
         
-        <!-- Contact/Footer -->
+        <!-- Contact/Footer — Redesigned -->
         <footer id="contact">
+            <div class="footer-glow"></div>
             <div class="container footer-content">
-                <h2>Let's build something <br><span class="gradient-text">extraordinary.</span></h2>
-                <div class="contact-links">
-                    <a href="mailto:haremmhamad99@gmail.com" class="footer-btn">Email Me</a>
-                    <a href="https://wa.me/9647703845087" target="_blank" class="footer-btn outline">WhatsApp</a>
+                <div class="footer-top">
+                    <span class="overline">Get In Touch</span>
+                    <h2>Let's build something <br><span class="gradient-text">extraordinary.</span></h2>
+                    <p class="footer-subtitle">Have a project in mind or want to collaborate? I'm always open to discussing new opportunities and ideas.</p>
+                    <div class="contact-links">
+                        <a href="mailto:haremmhamad99@gmail.com" class="footer-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            Email Me
+                        </a>
+                        <a href="https://wa.me/9647703845087" target="_blank" class="footer-btn outline">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+                            WhatsApp
+                        </a>
+                    </div>
                 </div>
-                <div class="copyright">
-                    &copy; 2025 Harrem M Jalal.
+                <div class="footer-bottom">
+                    <div class="footer-brand">
+                        <span class="logo">Harrem<span class="dot">.</span></span>
+                    </div>
+                    <div class="footer-social-links">
+                        <a href="https://github.com/Harrem" target="_blank" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </a>
+                    </div>
+                    <div class="copyright">
+                        &copy; 2025 Harrem M Jalal.
+                    </div>
                 </div>
             </div>
         </footer>
@@ -263,9 +265,18 @@
                 <!-- Content -->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <span class="modal-category" id="modalCategory"></span>
+                        <div class="modal-meta-row">
+                            <span class="modal-category" id="modalCategory"></span>
+                            <span class="modal-year" id="modalYear"></span>
+                        </div>
                         <h2 class="modal-title" id="modalTitle"></h2>
+                        <p class="modal-role" id="modalRole"></p>
                         <p class="modal-subtitle" id="modalSubtitle"></p>
+                    </div>
+
+                    <!-- Outcome Highlight -->
+                    <div class="modal-section modal-highlight-section" id="modalHighlightSection">
+                        <div class="modal-highlight" id="modalHighlight"></div>
                     </div>
 
                     <!-- Tech Stack -->

@@ -12,8 +12,8 @@ function raf(time) {
 requestAnimationFrame(raf);
 
 
-// GSAP Animations
-document.addEventListener("DOMContentLoaded", () => {
+// GSAP Animations & Dynamic Project Loading
+document.addEventListener("DOMContentLoaded", async () => {
     
     // Register ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
@@ -44,9 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Remove loading class
     document.body.classList.remove("loading");
 
-    // Bento Grid Animations
-    const cards = document.querySelectorAll(".bento-card");
-    cards.forEach((card, index) => {
+    // About Section Card Animations
+    const aboutCards = document.querySelectorAll(".about-card");
+    aboutCards.forEach((card, index) => {
         gsap.from(card, {
             scrollTrigger: {
                 trigger: card,
@@ -61,34 +61,98 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Project Parallax/Fade
-    const projects = document.querySelectorAll(".project-item");
-    projects.forEach((item) => {
-        gsap.from(item.querySelector(".project-image-wrapper"), {
-            scrollTrigger: {
-                trigger: item,
-                start: "top 80%",
-            },
-            scale: 0.9,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out"
-        });
-        
-        gsap.from(item.querySelector(".project-info"), {
-            scrollTrigger: {
-                trigger: item,
-                start: "top 80%",
-            },
-            x: item.classList.contains("reverse") ? -50 : 50,
-            opacity: 0,
-            duration: 1,
-            delay: 0.2,
-            ease: "power3.out"
-        });
+    // ===== FETCH & RENDER PROJECTS =====
+    let projectsData = [];
+    try {
+        const response = await fetch('./projects.json');
+        projectsData = await response.json();
+    } catch (err) {
+        console.error('Failed to load projects:', err);
+    }
+
+    // Build category filter buttons
+    const filtersContainer = document.getElementById('projectFilters');
+    const categories = [...new Set(projectsData.map(p => p.category))];
+    categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.filter = cat;
+        btn.textContent = cat;
+        filtersContainer.appendChild(btn);
     });
 
-    // Custom Cursor
+    // Render project cards
+    const grid = document.getElementById('projectsGrid');
+
+    function renderProjects(filter = 'all') {
+        grid.innerHTML = '';
+        const filtered = filter === 'all' ? projectsData : projectsData.filter(p => p.category === filter);
+
+        filtered.forEach((project, index) => {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.dataset.project = project.slug;
+            card.style.animationDelay = `${index * 0.05}s`;
+
+            const techPreview = project.techStack.slice(0, 3).join(' · ');
+            const techMore = project.techStack.length > 3 ? ` +${project.techStack.length - 3}` : '';
+
+            const coverHTML = project.cover
+                ? `<img src="${project.cover}" alt="${project.title}" loading="lazy" onerror="this.parentElement.classList.add('no-cover')">`
+                : '';
+
+            card.innerHTML = `
+                <div class="project-card-image${!project.cover ? ' no-cover' : ''}">
+                    ${coverHTML}
+                    <div class="project-card-overlay"></div>
+                    <span class="project-card-category">${project.category}</span>
+                </div>
+                <div class="project-card-body">
+                    <div class="project-card-year">${project.year}</div>
+                    <h3 class="project-card-title">${project.title}</h3>
+                    <p class="project-card-summary">${project.summary}</p>
+                    <div class="project-card-tech">${techPreview}<span class="tech-more">${techMore}</span></div>
+                    <span class="project-card-link">
+                        View Details
+                        <svg class="arrow-mini" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </span>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+        // Animate cards in
+        gsap.from('.project-card', {
+            y: 40,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.08,
+            ease: "power3.out",
+            clearProps: "all"
+        });
+
+        // Attach click handlers
+        document.querySelectorAll('.project-card[data-project]').forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('a[href^="http"]')) return;
+                const slug = card.dataset.project;
+                const project = projectsData.find(p => p.slug === slug);
+                if (project) openProjectModal(project);
+            });
+        });
+    }
+
+    renderProjects();
+
+    // Filter click handlers
+    filtersContainer.addEventListener('click', (e) => {
+        if (!e.target.classList.contains('filter-btn')) return;
+        filtersContainer.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        renderProjects(e.target.dataset.filter);
+    });
+
+    // ===== CUSTOM CURSOR =====
     const cursorDot = document.querySelector(".cursor-dot");
     const cursorOutline = document.querySelector(".cursor-outline");
 
@@ -96,11 +160,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const posX = e.clientX;
         const posY = e.clientY;
 
-        // Dot follows instantly
         cursorDot.style.left = `${posX}px`;
         cursorDot.style.top = `${posY}px`;
 
-        // Outline follows with lag (using GSAP for smoothness)
         gsap.to(cursorOutline, {
             x: posX,
             y: posY,
@@ -110,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Cursor Interactions
-    const interactiveElements = document.querySelectorAll("a, button, .bento-card");
+    const interactiveElements = document.querySelectorAll("a, button, .about-card, .project-card");
     interactiveElements.forEach(el => {
         el.addEventListener("mouseenter", () => {
             gsap.to(cursorOutline, {
@@ -140,9 +202,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 lenis.scrollTo(targetElement, {
-                    offset: -100, // Offset for fixed header
+                    offset: -100,
                     duration: 1.5,
-                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential ease out
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
                     lock: true,
                     force: true
                 });
@@ -150,109 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // ===== Project Detail Modal =====
-    const projectData = {
-        transcanada: {
-            category: 'Full-Stack Solution',
-            title: 'Transcanada Export',
-            subtitle: 'A comprehensive car export platform built for Transcanada Export. The project includes a full marketing website with landing page, portfolio, contact, and gallery sections. A cross-platform mobile app keeps customers informed about their car export status with real-time push notifications. An admin panel provides full control over car inventory, customer management, and notification dispatch.',
-            heroImage: 'assets/img/transcanada-hero.jpg',
-            techStack: ['Flutter', 'Laravel', 'Firebase Cloud Messaging', 'MySQL', 'REST API', 'Blade Templates', 'HTML/CSS/JS'],
-            features: [
-                'Responsive marketing website',
-                'Car portfolio & gallery showcase',
-                'Mobile app for export status tracking',
-                'Push notifications via FCM',
-                'Admin panel for car & customer management',
-                'Contact forms & inquiry system',
-                'Real-time status updates',
-                'Image gallery management'
-            ],
-            gallery: [
-                'assets/img/transcanada-web.jpg',
-                'assets/img/transcanada-mobile.jpg',
-            ],
-            links: [
-                { label: 'Visit Website', url: 'https://transcanadaexport.com', primary: true },
-            ]
-        },
-        smartretail: {
-            category: 'Desktop Application',
-            title: 'SmartRetail',
-            subtitle: 'A comprehensive retail management system designed for small businesses. SmartRetail provides everything a shop needs — from point-of-sale and inventory tracking to supplier and customer debt management, expense logging, sales history, and revenue reporting. Built as a desktop application with multi-user support for managers and employees.',
-            heroImage: 'assets/img/smartretail-hero.jpg',
-            techStack: ['Electron.js', 'TypeScript', 'ShadCN UI', 'SQLite', 'React', 'Node.js', 'Tailwind CSS'],
-            features: [
-                'Multi-user roles (Manager & Employee)',
-                'Point of Sale (POS) system',
-                'Inventory management',
-                'Supplier & customer management',
-                'Customer & supplier debt tracking',
-                'Expense logging & categorization',
-                'Sales history & reporting',
-                'Revenue & procurement analytics'
-            ],
-            gallery: [
-                'assets/img/smartretail-1.jpg',
-                'assets/img/smartretail-2.jpg',
-                'assets/img/smartretail-3.jpg'
-            ],
-            links: []
-        },
-        mrtravel: {
-            category: 'Flutter App',
-            title: 'mrtravel App',
-            subtitle: 'A personalized trip planning application that provides real-time updates and travel recommendations. Built with Flutter for a seamless cross-platform experience.',
-            heroImage: 'assets/img/Portfolio-0.png',
-            techStack: ['Flutter', 'Dart', 'REST API'],
-            features: [
-                'Personalized trip planning',
-                'Real-time travel updates',
-                'Cross-platform (iOS & Android)',
-                'Intuitive booking interface'
-            ],
-            gallery: [],
-            links: [
-                { label: 'App Store', url: 'https://apps.apple.com/us/app/mrtravel/id6473445431', primary: true },
-            ]
-        },
-        arwayfinding: {
-            category: 'Unity / AR',
-            title: 'AR Wayfinding',
-            subtitle: 'A next-generation indoor navigation system using Augmented Reality markers and pathfinding algorithms. Built with Unity for immersive real-world wayfinding experiences.',
-            heroImage: 'assets/img/Portfolio-1.jpg',
-            techStack: ['Unity', 'C#', 'AR Foundation', 'Vuforia'],
-            features: [
-                'AR-based indoor navigation',
-                'Real-time pathfinding algorithms',
-                'Marker-based positioning',
-                'Immersive user experience'
-            ],
-            gallery: [],
-            links: [
-                { label: 'View Code', url: 'https://github.com/Harrem/ArWayfindingProject', primary: true },
-            ]
-        },
-        realtimechat: {
-            category: 'Firebase',
-            title: 'Real-time Chat',
-            subtitle: 'An instant messaging application with seamless real-time synchronization powered by Firebase. Supports rich messaging features and a clean, modern UI.',
-            heroImage: 'assets/img/Portfolio-5.jpg',
-            techStack: ['Flutter', 'Firebase', 'Cloud Firestore', 'Firebase Auth'],
-            features: [
-                'Real-time message sync',
-                'User authentication',
-                'Rich messaging features',
-                'Online/offline status'
-            ],
-            gallery: [],
-            links: [
-                { label: 'View Code', url: 'https://github.com/Harrem/messagingApp', primary: true },
-            ]
-        }
-    };
-
-    // Modal elements
+    // ===== PROJECT DETAIL MODAL =====
     const modal = document.getElementById('projectModal');
     const modalClose = document.getElementById('modalClose');
     const modalBackdrop = modal.querySelector('.modal-backdrop');
@@ -264,16 +224,25 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.addEventListener('wheel', (e) => { e.stopPropagation(); }, { passive: true });
     modal.addEventListener('touchmove', (e) => { e.stopPropagation(); }, { passive: true });
 
-    function openProjectModal(projectKey) {
-        const data = projectData[projectKey];
-        if (!data) return;
-
+    function openProjectModal(data) {
         // Populate modal
-        document.getElementById('modalHeroImg').src = data.heroImage;
+        document.getElementById('modalHeroImg').src = data.cover;
         document.getElementById('modalHeroImg').alt = data.title;
         document.getElementById('modalCategory').textContent = data.category;
+        document.getElementById('modalYear').textContent = data.year;
         document.getElementById('modalTitle').textContent = data.title;
-        document.getElementById('modalSubtitle').textContent = data.subtitle;
+        document.getElementById('modalRole').textContent = data.role || '';
+        document.getElementById('modalSubtitle').textContent = data.summary;
+
+        // Outcome Highlight
+        const highlightSection = document.getElementById('modalHighlightSection');
+        const highlightEl = document.getElementById('modalHighlight');
+        if (data.outcomeHighlight) {
+            highlightEl.textContent = data.outcomeHighlight;
+            highlightSection.style.display = '';
+        } else {
+            highlightSection.style.display = 'none';
+        }
 
         // Tech Stack
         const techContainer = document.getElementById('modalTechStack');
@@ -281,13 +250,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Features
         const featuresContainer = document.getElementById('modalFeatures');
-        featuresContainer.innerHTML = data.features.map(f => `<li>${f}</li>`).join('');
+        if (data.features && data.features.length > 0) {
+            featuresContainer.innerHTML = data.features.map(f => `<li>${f}</li>`).join('');
+            featuresContainer.parentElement.style.display = '';
+        } else {
+            featuresContainer.innerHTML = '';
+            featuresContainer.parentElement.style.display = 'none';
+        }
 
         // Gallery
         const galleryContainer = document.getElementById('modalGallery');
-        if (data.gallery.length > 0) {
-            galleryContainer.innerHTML = data.gallery.map(img => 
-                `<div class="modal-gallery-item"><img src="${img}" alt="${data.title}" loading="lazy"></div>`
+        if (data.images && data.images.length > 0) {
+            galleryContainer.innerHTML = data.images.map(img => 
+                `<div class="modal-gallery-item"><img src="${img.src}" alt="${img.alt}" loading="lazy"></div>`
             ).join('');
             galleryContainer.parentElement.style.display = '';
         } else {
@@ -297,7 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Actions/Links
         const actionsContainer = document.getElementById('modalActions');
-        if (data.links.length > 0) {
+        if (data.links && data.links.length > 0) {
             actionsContainer.innerHTML = data.links.map(link => {
                 const cls = link.primary ? 'primary-action' : 'secondary-action';
                 return `<a href="${link.url}" target="_blank" class="${cls}">${link.label}
@@ -325,16 +300,6 @@ document.addEventListener("DOMContentLoaded", () => {
         lenis.start();
     }
 
-    // Event listeners for project items
-    document.querySelectorAll('.project-item[data-project]').forEach(item => {
-        item.addEventListener('click', (e) => {
-            // Don't trigger if clicking an actual external link
-            if (e.target.closest('a[href^="http"]')) return;
-            const projectKey = item.dataset.project;
-            openProjectModal(projectKey);
-        });
-    });
-
     // Close modal
     modalClose.addEventListener('click', closeProjectModal);
     modalBackdrop.addEventListener('click', closeProjectModal);
@@ -342,6 +307,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.key === 'Escape' && modal.classList.contains('active')) {
             closeProjectModal();
         }
+    });
+
+    // ===== FOOTER SECTION ANIMATION =====
+    gsap.from('.footer-top', {
+        scrollTrigger: {
+            trigger: 'footer',
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+        },
+        y: 60,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out'
     });
 
 });

@@ -1,0 +1,274 @@
+[
+  {
+    "slug": "bidit",
+    "title": "BidIt",
+    "category": "Full-Stack Solution",
+    "role": "Full-Stack Developer & UI/UX Designer",
+    "year": 2026,
+    "summary": "A real-time auction platform with live bidding through a Flutter mobile app, powered by Laravel backend with WebSocket broadcasting.",
+    "cover": "images/bidit/01.png",
+    "images": [],
+    "problem": "Traditional auction platforms rely on periodic polling, causing delayed bid updates and missed opportunities during final auction seconds.",
+    "outcome": "Scalable real-time auction platform with instant bid sync, automated product listing, and comprehensive auction management.",
+    "outcomeHighlight": "Sub-second real-time bidding powered by WebSockets.",
+    "techStack": ["Flutter", "Laravel", "PHP", "MySQL", "Redis", "Laravel Reverb", "Firebase Cloud Messaging", "GetX"],
+    "features": [
+      "Real-time bid synchronization",
+      "Barcode product cataloging",
+      "Push notification workflows",
+      "Outbid & winning alerts",
+      "Admin bid audit trails",
+      "Multi-device sync"
+    ],
+    "links": []
+  },
+  {
+    "slug": "topcars",
+    "title": "TopCars",
+    "category": "Full-Stack Solution",
+    "role": "Full-Stack Developer & UI/UX Designer",
+    "year": 2026,
+    "summary": "A multi-language automotive marketplace for browsing, buying, selling, and renting vehicles through Flutter and Laravel.",
+    "cover": "images/topcars/01.png",
+    "images": [],
+    "problem": "Regional automotive marketplaces lack localization, offer outdated interfaces, and fragment buying/selling/renting into separate platforms.",
+    "outcome": "Modern automotive marketplace consolidating buying, selling, and renting into a single localized platform.",
+    "outcomeHighlight": "Unified marketplace for buying, selling, and renting vehicles.",
+    "techStack": ["Flutter", "Laravel", "PHP", "Riverpod", "Dio", "Hive", "Laravel Passport", "MySQL"],
+    "features": [
+      "Multi-language (EN, Kurdish, Arabic)",
+      "Full RTL support",
+      "Buy, sell & rent vehicles",
+      "Advanced search & filters",
+      "OAuth2 authentication",
+      "Light/dark themes"
+    ],
+    "links": []
+  },
+  {
+    "slug": "medianexus",
+    "title": "MediaNexus",
+    "category": "iOS Application",
+    "role": "iOS Developer & UI/UX Designer",
+    "year": 2026,
+    "summary": "A native iOS entertainment app delivering a cinematic movie and TV discovery experience using SwiftUI, Combine, and TMDb API.",
+    "cover": "images/medianexus/01.png",
+    "images": [],
+    "problem": "Media discovery apps suffer from slow loading, fragmented content, and uninspiring interfaces with sequential network requests.",
+    "outcome": "High-performance native iOS app combining fast concurrent networking with a polished cinematic interface.",
+    "outcomeHighlight": "Parallel multi-endpoint loading for seamless cinematic browsing.",
+    "techStack": ["Swift", "SwiftUI", "Combine", "Swift Concurrency", "MVVM", "URLSession", "TMDb API"],
+    "features": [
+      "Parallax hero headers",
+      "Auto-advancing carousels",
+      "Animated rating indicators",
+      "Full-screen media galleries",
+      "Real-time search & filtering",
+      "Parallel data loading"
+    ],
+    "links": []
+  },
+  {
+    "slug": "sportstream",
+    "title": "SPORTSTREAM",
+    "category": "Web Application",
+    "role": "Frontend Developer & UI/UX Designer",
+    "year": 2026,
+    "summary": "A lightweight sports streaming hub for Smart TVs, desktops, and mobile, with a cinematic interface and spatial remote navigation.",
+    "cover": "images/sportstream/01.png",
+    "images": [],
+    "problem": "Sports fans rely on multiple fragmented websites with intrusive ads and poor Smart TV usability for live match streaming.",
+    "outcome": "Fast, responsive sports streaming hub with modern viewing experience across desktops and Smart TVs.",
+    "outcomeHighlight": "Framework-free sports streaming platform optimized for Smart TVs.",
+    "techStack": ["HTML5", "CSS3", "JavaScript (ES6+)", "REST API", "LocalStorage"],
+    "features": [
+      "10-foot Smart TV interface",
+      "Spatial remote navigation",
+      "Embedded stream playback",
+      "Persistent viewing history",
+      "Category-based browsing",
+      "Search functionality"
+    ],
+    "links": []
+  },
+  {
+    "slug": "transcanada-export",
+    "title": "Transcanada Export",
+    "category": "Full-Stack System",
+    "role": "Lead Full-Stack Developer & Product Designer",
+    "year": 2025,
+    "summary": "End-to-end car export ecosystem — web platform, mobile tracking app, and real-time admin portal.",
+    "cover": "images/transcanada-export/01.jpg",
+    "images": [
+      { "src": "images/transcanada-export/01.jpg", "alt": "Transcanada Export platform overview", "caption": "Platform overview" },
+      { "src": "images/transcanada-export/02.jpg", "alt": "Featured Cars Gallery", "caption": "Featured Cars Gallery" },
+      { "src": "images/transcanada-export/03.jpg", "alt": "Mobile tracking companion app", "caption": "Mobile companion" },
+      { "src": "images/transcanada-export/04.jpg", "alt": "Admin dashboard", "caption": "Admin dashboard" },
+      { "src": "images/transcanada-export/05.jpg", "alt": "Transcanada gallery", "caption": "Gallery" }
+    ],
+    "problem": "Vehicle export logistics were fragmented across spreadsheets, manual WhatsApp updates, and paper docs, causing tracking delays.",
+    "outcome": "Reduced vehicle processing time by 65% and onboarded over 10,000 active buyers within 3 months.",
+    "outcomeHighlight": "Shipped in 3 months · 65% faster processing",
+    "techStack": ["Flutter", "Laravel", "Firebase Cloud Messaging", "MySQL", "REST API", "Blade Templates", "HTML/CSS/JS"],
+    "features": [
+      "Responsive marketing website",
+      "Car portfolio & gallery showcase",
+      "Mobile app for export tracking",
+      "Push notifications via FCM",
+      "Admin panel for car & customer management",
+      "Real-time status updates"
+    ],
+    "links": [
+      { "label": "Visit Website", "url": "https://transcanadaexport.com", "primary": true }
+    ]
+  },
+  {
+    "slug": "eye-tracking-mouse-controller",
+    "title": "Eye Tracking Mouse Controller",
+    "category": "Computer Vision",
+    "role": "Python Developer",
+    "year": 2025,
+    "summary": "A desktop app that transforms eye movements into mouse cursor control using computer vision, enabling hands-free interaction through a webcam.",
+    "cover": "images/eye-tracking-mouse-controller/01.png",
+    "images": [],
+    "problem": "Traditional cursor interaction depends on physical input devices, making hands-free control difficult for accessibility needs.",
+    "outcome": "Functional proof-of-concept controlling the system mouse cursor through eye movement alone with calibration and smoothing.",
+    "outcomeHighlight": "Hands-free mouse control using only a webcam.",
+    "techStack": ["Python", "OpenCV", "MediaPipe", "PyAutoGUI", "NumPy", "ScreenInfo"],
+    "features": [
+      "Real-time eye tracking",
+      "Five-point calibration",
+      "Exponential smoothing",
+      "Iris position estimation",
+      "Keyboard controls",
+      "Cross-display support"
+    ],
+    "links": []
+  },
+  {
+    "slug": "eid-passport-scanner",
+    "title": "eID & Passport Scanner",
+    "category": "Mobile Application",
+    "role": "Flutter Developer",
+    "year": 2025,
+    "summary": "Scans passports and eID cards, validates MRZ data, and reads biometric information from NFC chips using the ICAO 9303 standard.",
+    "cover": "images/eid-passport-scanner/01.png",
+    "images": [],
+    "problem": "Identity verification requires manually entering document info before reading NFC chips, making the process slow and error-prone.",
+    "outcome": "Secure identity verification app for scanning MRZ data, validating integrity, and reading biometrics from ICAO-compliant documents.",
+    "outcomeHighlight": "End-to-end MRZ scanning and secure NFC biometric verification.",
+    "techStack": ["Flutter", "Dart", "Google ML Kit", "Flutter NFC Kit", "ICAO 9303", "PointyCastle", "Crypto"],
+    "features": [
+      "Real-time MRZ scanning",
+      "OCR error correction",
+      "ICAO 9303 checksum validation",
+      "NFC biometric reading",
+      "BAC & PACE authentication",
+      "Interactive verification flow"
+    ],
+    "links": []
+  },
+  {
+    "slug": "smartretail",
+    "title": "SmartRetail",
+    "category": "Desktop Application",
+    "role": "Full-Stack Developer",
+    "year": 2024,
+    "summary": "All-in-one retail management system for small businesses with POS, inventory, and revenue reporting.",
+    "cover": "images/smartretail/01.jpg",
+    "images": [
+      { "src": "images/smartretail/01.jpg", "alt": "SmartRetail dashboard", "caption": "Dashboard overview" },
+      { "src": "images/smartretail/02.jpg", "alt": "Point of sale interface", "caption": "POS interface" },
+      { "src": "images/smartretail/03.jpg", "alt": "Inventory management", "caption": "Inventory management" },
+      { "src": "images/smartretail/04.jpg", "alt": "Sales reporting", "caption": "Sales reporting" }
+    ],
+    "problem": "Small businesses lack affordable, comprehensive retail management tools that combine POS, inventory, and financial tracking.",
+    "outcome": "Comprehensive desktop retail solution handling POS, inventory, debt tracking, and revenue analytics for small businesses.",
+    "outcomeHighlight": "All-in-one retail management for small businesses.",
+    "techStack": ["Electron.js", "TypeScript", "ShadCN UI", "SQLite", "React", "Node.js", "Tailwind CSS"],
+    "features": [
+      "Multi-user roles (Manager & Employee)",
+      "Point of Sale (POS) system",
+      "Inventory management",
+      "Customer & supplier debt tracking",
+      "Expense logging & categorization",
+      "Sales history & reporting"
+    ],
+    "links": []
+  },
+  {
+    "slug": "mrtravel",
+    "title": "mrtravel App",
+    "category": "Flutter App",
+    "role": "Flutter Developer",
+    "year": 2024,
+    "summary": "Personalized trip planning application with real-time updates and travel recommendations.",
+    "cover": "images/mrtravel/01.png",
+    "images": [
+      { "src": "images/mrtravel/01.png", "alt": "mrtravel app", "caption": "App overview" }
+    ],
+    "problem": "Trip planning involves juggling multiple apps and websites, creating a fragmented travel experience.",
+    "outcome": "Seamless cross-platform trip planning app with personalized recommendations and real-time travel updates.",
+    "outcomeHighlight": "Personalized trip planning with real-time updates.",
+    "techStack": ["Flutter", "Dart", "REST API"],
+    "features": [
+      "Personalized trip planning",
+      "Real-time travel updates",
+      "Cross-platform (iOS & Android)",
+      "Intuitive booking interface"
+    ],
+    "links": [
+      { "label": "App Store", "url": "https://apps.apple.com/us/app/mrtravel/id6473445431", "primary": true }
+    ]
+  },
+  {
+    "slug": "arwayfinding",
+    "title": "AR Wayfinding",
+    "category": "Unity / AR",
+    "role": "Unity Developer",
+    "year": 2024,
+    "summary": "Next-gen indoor navigation using Augmented Reality markers and pathfinding algorithms.",
+    "cover": "images/arwayfinding/01.jpg",
+    "images": [
+      { "src": "images/arwayfinding/01.jpg", "alt": "AR Wayfinding", "caption": "AR navigation" }
+    ],
+    "problem": "Indoor navigation systems rely on imprecise GPS or static signage, providing poor real-time guidance in complex buildings.",
+    "outcome": "Immersive AR-based indoor navigation system with real-time pathfinding and marker-based positioning.",
+    "outcomeHighlight": "AR-powered indoor navigation with real-time pathfinding.",
+    "techStack": ["Unity", "C#", "AR Foundation", "Vuforia"],
+    "features": [
+      "AR-based indoor navigation",
+      "Real-time pathfinding algorithms",
+      "Marker-based positioning",
+      "Immersive user experience"
+    ],
+    "links": [
+      { "label": "View Code", "url": "https://github.com/Harrem/ArWayfindingProject", "primary": true }
+    ]
+  },
+  {
+    "slug": "realtimechat",
+    "title": "Real-time Chat",
+    "category": "Firebase",
+    "role": "Flutter Developer",
+    "year": 2023,
+    "summary": "Instant messaging app with seamless real-time synchronization powered by Firebase.",
+    "cover": "images/realtimechat/01.jpg",
+    "images": [
+      { "src": "images/realtimechat/01.jpg", "alt": "Real-time Chat app", "caption": "Chat interface" }
+    ],
+    "problem": "Many chat apps sacrifice simplicity for feature bloat, creating overly complex interfaces for basic messaging needs.",
+    "outcome": "Clean, responsive messaging application with real-time sync and modern UI powered by Firebase.",
+    "outcomeHighlight": "Real-time messaging with Firebase sync.",
+    "techStack": ["Flutter", "Firebase", "Cloud Firestore", "Firebase Auth"],
+    "features": [
+      "Real-time message sync",
+      "User authentication",
+      "Rich messaging features",
+      "Online/offline status"
+    ],
+    "links": [
+      { "label": "View Code", "url": "https://github.com/Harrem/messagingApp", "primary": true }
+    ]
+  }
+]
