@@ -52,6 +52,34 @@
     "links": []
   },
   {
+    "slug": "employee-payout-tracker",
+    "title": "Employee Payout Tracker",
+    "category": "Full-Stack Solution",
+    "role": "Full-Stack Developer & UI/UX Designer",
+    "year": 2026,
+    "summary": "A modern employee payout and payroll tracking web application built with Laravel, Vue.js, and Inertia.js featuring role-based access control.",
+    "cover": "images/employee-payout-tracker/01.webp",
+    "images": [
+      { "src": "images/employee-payout-tracker/01.webp", "alt": "Payouts management and disbursement table", "caption": "Payouts management table" },
+      { "src": "images/employee-payout-tracker/02.webp", "alt": "Employee directory and payout counters", "caption": "Employee directory" }
+    ],
+    "problem": "Managing employee salary payouts and maintaining role-based visibility can be error-prone and lack auditability without a dedicated modern dashboard.",
+    "outcome": "Streamlined web application enabling seamless staff payout tracking and robust administrative management.",
+    "outcomeHighlight": "Role-based payroll tracker built with Laravel, Vue & Inertia.js.",
+    "techStack": ["Laravel", "Vue.js", "Inertia.js", "PHP", "MySQL", "TailwindCSS"],
+    "features": [
+      "Role-based access control (Admin & Staff roles)",
+      "Employee salary & payout tracking",
+      "Interactive Vue + Inertia single-page application experience",
+      "Disbursement status management",
+      "Staff personal payout history",
+      "Admin payroll & reporting panel"
+    ],
+    "links": [
+      { "label": "View Code", "url": "https://github.com/Harrem/employee-payout-tracker", "primary": true }
+    ]
+  },
+  {
     "slug": "medianexus",
     "title": "MediaNexus",
     "category": "iOS Application",

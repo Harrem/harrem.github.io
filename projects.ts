@@ -94,6 +94,28 @@ export const projects: Project[] = [
         ],
     },
     {
+        slug: "employee-payout-tracker",
+        title: "Employee Payout Tracker",
+        category: "Full-Stack Solution",
+        role: "Full-Stack Developer & UI/UX Designer",
+        year: 2026,
+        summary: "A modern employee payout and payroll tracking web application built with Laravel, Vue.js, and Inertia.js featuring role-based access control.",
+        cover: "/images/employee-payout-tracker/01.webp",
+        images: projectImages("employee-payout-tracker", [
+            { alt: "Payouts management and disbursement table", caption: "Payouts management table" },
+            { alt: "Employee directory and payout counters", caption: "Employee directory" }
+        ]),
+        problem: "Managing employee salary payouts and maintaining role-based visibility can be error-prone and lack auditability without a dedicated modern dashboard.",
+        process: [
+            "Architected a single-page application experience using Laravel with Inertia.js and Vue 3.",
+            "Implemented role-based authorization (Admin and Staff) to isolate administrative payroll controls from staff payout receipts.",
+            "Designed a clean, responsive TailwindCSS dashboard for viewing payout statuses, historical disbursements, and employee metrics."
+        ],
+        outcome: "Streamlined web application enabling seamless staff payout tracking and robust administrative management.",
+        outcomeHighlight: "Role-based payroll tracker built with Laravel, Vue & Inertia.js.",
+        techStack: ["Laravel", "Vue.js", "Inertia.js", "PHP", "MySQL", "TailwindCSS"],
+    },
+    {
         slug: "bidit",
         title: "BidIt",
         category: "Full-Stack Solution",
