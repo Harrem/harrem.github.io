@@ -188,40 +188,39 @@ export const projects: Project[] = [
         ],
     },
     {
-        slug: "topcars",
-        title: "TopCars",
+        slug: "tapcars",
+        title: "TapCars",
         category: "Full-Stack Solution",
         role: "Full-Stack Developer & UI/UX Designer",
         year: 2026,
-        summary: "A multi-language automotive marketplace that enables users to browse, buy, sell, and rent vehicles through a Flutter mobile application powered by a secure Laravel REST API.",
-        cover: "/images/topcars/01.png",
-        images: projectImages("topcars", [
-            { alt: "TopCars marketplace home", caption: "Marketplace home" },
-            { alt: "Vehicle listing detail page", caption: "Listing detail" },
-            { alt: "Advanced search and filters", caption: "Search & filters" },
-            { alt: "Multi-language RTL interface", caption: "RTL localization" },
-            { alt: "Seller listing submission flow", caption: "Listing submission" },
+        summary: "A two-sided car rental marketplace where hosts list vehicles and renters book available dates, featuring a database-enforced zero-double-booking guarantee, identity verification, and bilingual support.",
+        cover: "/images/tapcars/01.webp",
+        images: projectImages("tapcars", [
+            { alt: "TapCars rental marketplace home", caption: "Vehicle discovery" },
+            { alt: "Car detail and availability calendar", caption: "Availability calendar" },
+            { alt: "Host fleet management dashboard", caption: "Host fleet management" },
+            { alt: "Renter identity verification screen", caption: "Identity verification" },
+            { alt: "Bilingual Kurdish and English interface", caption: "Bilingual localization" },
         ]),
         problem:
-            "Regional automotive marketplaces often provide fragmented experiences, lack proper localization, and offer outdated interfaces that make buying, selling, and renting vehicles unnecessarily difficult. Users need a unified, mobile-first platform that supports multiple languages while serving both individuals and dealerships.",
+            "Car rental platforms frequently suffer from double-booking race conditions during peak demand, unreliable calendar synchronization, and fragmented workflows between hosts and renters. Users and hosts need a high-integrity, mobile-first marketplace where displayed availability is guaranteed without double bookings.",
         process: [
-            "Designed and developed a complete full-stack solution consisting of a Flutter mobile application and a Laravel REST API with secure OAuth2 authentication.",
-            "Built a responsive mobile experience supporting English, Sorani Kurdish, and Arabic, including full RTL compatibility and dynamic light/dark themes.",
-            "Implemented vehicle browsing across new, used, and rental categories with advanced search, filtering, watchlists, authentication, and listing submission workflows.",
-            "Designed the backend architecture to provide secure RESTful APIs for user management, vehicle listings, authentication, and future transaction workflows while keeping the platform scalable for upcoming features."
+            "Architected a PostgreSQL database using btree_gist exclusion constraints to enforce non-overlapping booking date ranges natively at the database engine level.",
+            "Built a robust Node.js, Express, TypeScript, and Prisma backend handling transaction-safe booking flows, pricing logic, availability checks, and conflict error handling.",
+            "Developed a cross-platform Flutter mobile application with dedicated role-based architectures for hosts and renters.",
+            "Integrated renter identity verification workflows, host media caching, an administrative review console, and bilingual localization supporting English and Kurdish Sorani (Sulaymaniyah dialect) with RTL layouts."
         ],
         outcome:
-            "Developed a modern automotive marketplace that consolidates buying, selling, and renting vehicles into a single localized platform, establishing a scalable foundation for future marketplace features and integrations.",
-        outcomeHighlight: "Unified marketplace for buying, selling, and renting vehicles.",
+            "Engineered a reliable, production-ready car rental marketplace that eliminates double bookings by design, streamlining reservations, host fleet management, and identity verification.",
+        outcomeHighlight: "Zero double-bookings guarantee enforced at the PostgreSQL engine level.",
         techStack: [
             "Flutter",
-            "Laravel",
-            "PHP",
-            "Riverpod",
-            "Dio",
-            "Hive",
-            "Laravel Passport",
-            "MySQL"
+            "Node.js",
+            "Express",
+            "TypeScript",
+            "Prisma",
+            "PostgreSQL",
+            "Docker"
         ],
     },
     {
