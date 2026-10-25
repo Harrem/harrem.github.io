@@ -36,7 +36,12 @@
     "year": 2026,
     "summary": "A two-sided car rental marketplace where hosts list vehicles and renters book available dates, featuring a database-enforced zero-double-booking guarantee, identity verification, and bilingual support.",
     "cover": "images/tapcars/01.webp",
-    "images": [],
+    "images": [
+      { "src": "images/tapcars/01.webp", "alt": "TapCars marketplace home and vehicle discovery", "caption": "Vehicle discovery & home feed" },
+      { "src": "images/tapcars/02.webp", "alt": "Car detail and availability calendar", "caption": "Availability calendar & booking" },
+      { "src": "images/tapcars/03.webp", "alt": "Host fleet management dashboard", "caption": "Host fleet management" },
+      { "src": "images/tapcars/04.webp", "alt": "Renter identity verification screen", "caption": "Renter ID verification workflow" }
+    ],
     "problem": "Car rental platforms frequently suffer from double-booking race conditions during peak demand, unreliable calendar synchronization, and fragmented workflows between hosts and renters.",
     "outcome": "Robust two-sided car rental marketplace ensuring zero double-bookings via database-level exclusion constraints, complete with identity verification, fleet management, and localized Kurdish/English support.",
     "outcomeHighlight": "Zero double-bookings guarantee enforced at the PostgreSQL engine level.",

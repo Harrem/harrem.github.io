@@ -119,6 +119,28 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </div>
             `;
             grid.appendChild(card);
+
+            // Detect portrait/phone cover image and apply phone showcase styling
+            const cardImgWrap = card.querySelector('.project-card-image');
+            const cardImg = card.querySelector('.project-card-image img');
+            if (cardImg) {
+                const applyCardCoverOrientation = () => {
+                    if (cardImg.naturalHeight > cardImg.naturalWidth * 1.05) {
+                        cardImgWrap.classList.add('is-phone-cover');
+                        if (!cardImgWrap.querySelector('.project-card-phone-bg')) {
+                            const bgDiv = document.createElement('div');
+                            bgDiv.className = 'project-card-phone-bg';
+                            bgDiv.style.backgroundImage = `url('${cardImg.src}')`;
+                            cardImgWrap.prepend(bgDiv);
+                        }
+                    }
+                };
+                if (cardImg.complete && cardImg.naturalHeight) {
+                    applyCardCoverOrientation();
+                } else {
+                    cardImg.addEventListener('load', applyCardCoverOrientation, { once: true });
+                }
+            }
         });
 
         // Animate cards in
@@ -235,16 +257,37 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const overlay = document.getElementById('imageZoomOverlay');
         const img = document.getElementById('zoomImg');
+        const ambientBg = document.getElementById('zoomAmbientBg');
         const caption = document.getElementById('zoomCaption');
         const counter = document.getElementById('zoomCounter');
         const nav = overlay.querySelectorAll('.zoom-nav');
+        const wrap = document.getElementById('zoomWrap');
+        const hint = document.getElementById('zoomScaleHint');
 
         const cur = imgs[window._zoom.index];
         img.src = cur.src;
         img.alt = cur.alt || '';
+        if (ambientBg) ambientBg.style.backgroundImage = `url('${cur.src}')`;
         caption.textContent = cur.caption || '';
         counter.textContent = `${window._zoom.index + 1} / ${imgs.length}`;
         nav.forEach(b => b.style.display = imgs.length > 1 ? '' : 'none');
+
+        // Reset 1:1 zoom inspection mode on slide change
+        if (wrap) wrap.classList.remove('is-zoomed-100');
+        if (hint) {
+            const hintText = hint.querySelector('.zoom-hint-text');
+            if (hintText) hintText.textContent = 'Click image to inspect 1:1';
+        }
+
+        function updateZoomOrientation() {
+            const isPortrait = img.naturalHeight > img.naturalWidth * 1.05;
+            overlay.classList.toggle('is-portrait', isPortrait);
+        }
+        if (img.complete && img.naturalHeight) {
+            updateZoomOrientation();
+        } else {
+            img.onload = updateZoomOrientation;
+        }
 
         overlay.classList.add('active');
         document.body.classList.add('zoom-open');
@@ -267,10 +310,28 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById('zoomPrev').addEventListener('click', () => window.zoomStep(-1));
     document.getElementById('zoomNext').addEventListener('click', () => window.zoomStep(1));
     document.getElementById('imageZoomOverlay').addEventListener('click', (e) => {
-        if (e.target.id === 'imageZoomOverlay' || e.target.classList.contains('zoom-backdrop')) {
+        if (e.target.id === 'imageZoomOverlay' || e.target.classList.contains('zoom-backdrop') || e.target.id === 'zoomContainer') {
             window.closeZoom();
         }
     });
+
+    // Toggle 1:1 inspection view when clicking zoomed image
+    const zoomWrap = document.getElementById('zoomWrap');
+    if (zoomWrap) {
+        zoomWrap.addEventListener('click', (e) => {
+            e.stopPropagation();
+            zoomWrap.classList.toggle('is-zoomed-100');
+            const hint = document.getElementById('zoomScaleHint');
+            if (hint) {
+                const hintText = hint.querySelector('.zoom-hint-text');
+                if (hintText) {
+                    hintText.textContent = zoomWrap.classList.contains('is-zoomed-100')
+                        ? 'Click image to fit to screen'
+                        : 'Click image to inspect 1:1';
+                }
+            }
+        });
+    }
 
     // Keyboard shortcuts
     document.addEventListener('keydown', (e) => {
@@ -307,13 +368,31 @@ document.addEventListener("DOMContentLoaded", async () => {
         let activeIdx = 0;
         const showNav = allImages.length > 1;
 
+        function checkOrientation(imgSrc) {
+            const temp = new Image();
+            temp.onload = () => {
+                const isPortrait = temp.naturalHeight > temp.naturalWidth * 1.05;
+                const wrapper = galleryContainer.querySelector('.carousel-wrapper');
+                const thumbs = galleryContainer.querySelector('.carousel-thumbnails');
+                if (wrapper) wrapper.classList.toggle('is-portrait', isPortrait);
+                if (thumbs) thumbs.classList.toggle('is-portrait', isPortrait);
+            };
+            temp.src = imgSrc;
+        }
+
         function render() {
             const cur = allImages[activeIdx];
             galleryContainer.innerHTML = `
                 <div class="carousel-wrapper">
                     <div class="carousel-main-wrap">
-                        <div class="carousel-main">
-                            <img class="carousel-slide-img" src="${cur.src}" alt="${cur.alt || ''}" decoding="async" loading="eager">
+                        <div class="carousel-main" data-action="expand">
+                            <div class="carousel-ambient-bg" style="background-image: url('${cur.src}')"></div>
+                            <div class="carousel-stage">
+                                <div class="carousel-phone-frame">
+                                    <div class="phone-dynamic-island"></div>
+                                    <img class="carousel-slide-img" src="${cur.src}" alt="${cur.alt || ''}" decoding="async" loading="eager">
+                                </div>
+                            </div>
                         </div>
                         <button class="carousel-expand-btn" data-action="expand" aria-label="View full screen">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
@@ -339,6 +418,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                         </div>
                     ` : ''}
                 </div>`;
+
+            checkOrientation(cur.src);
         }
 
         // Single delegated listener — survives re-renders because it's on the outer container
